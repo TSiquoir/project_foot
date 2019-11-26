@@ -11,27 +11,23 @@ $teams = $stmt->fetchAll();
 ?>
 
 <div class="container">
-    <div class="row">
     <?php foreach ($teams as $team) { ?>
-        <div class="col-4">
-            <div class='card-image'>
-                <img class="img_livre" src="<?php echo $team["image"]; ?> " class="card-img-top" alt="<?php echo $team ['title']; ?> ">
-            </div> 
-            <div class="card-body">
-                <h5 class="card-title">
-                <a href="?action=book&id=<?php echo $team['id']; ?>">
-                        <?php echo $team['name']; ?>
-                </a>
-                </h5>
-                <p><?php echo $team ['author']; ?> </p>
-
-                <?php foreach ($teams as $team) { ?>
-            <div class="col-lg-3 col-md-4 mt-4">
-                <?php echo $team['name']; ?>
+        <div class="card mb-3 rounded shadow-sm p-3 mb-5 bg-white rounded text-center">
+            <div class="row no-gutters">
+                <div class="col-md-2 teams">
+                <img src="<?= $team['logo'] ?>" class="card-img" alt="logo de l'équipe">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><?= $team['short_name'] ?></h5>
+                    <p class="card-text"><?= $team['adress'] ?></p>
+                    <p class="card-text"><small class="text-muted"><?= $team['link'] ?></small></p>
+                </div>
+                </div>
             </div>
-        <?php } ?>
-   
-    </div>
+        </div>
+            
+    <?php } ?>
 </div>
 
 <?php include('include/footer.php'); ?>
