@@ -1,11 +1,14 @@
 <?php include('include/header.php'); ?>
 
 <?php
-require('utils/db.php');
+//==============================================================
+//Pour récuperer les données
+//==============================================================
+require('utils/db.php');        
 
 $db = dbConnect();
 
-$stmt = $db->prepare('SELECT * FROM teams');
+$stmt = $db->prepare('SELECT * FROM teams');  
 $stmt->execute();
 $teams = $stmt->fetchAll();
 ?>
@@ -28,7 +31,6 @@ $teams = $stmt->fetchAll();
                 </div>
             </a>
         </div>
-            
     <?php } ?>
 </div>
 
