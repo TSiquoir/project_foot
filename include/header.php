@@ -22,10 +22,10 @@
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Equipe</a>
+                  <a class="nav-link" href="#">Equipes</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Dropdown</a>              
+                  <a class="nav-link" href="#">Matchs</a>              
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Dropdown</a>              

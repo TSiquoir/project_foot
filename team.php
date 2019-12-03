@@ -22,6 +22,7 @@ INNER JOIN coachs_has_teams
 ON coachs_has_teams.id_team =teams.id
 INNER JOIN coachs
 ON coachs.id =coachs_has_teams.id_coach
+
 WHERE teams.id = :id');   
 $stmt->bindValue(':id', $idTeam);
 $stmt->execute();
@@ -29,116 +30,76 @@ $team = $stmt->fetch();
 
 
 
+$stmt = $db->prepare('SELECT * FROM players  INNER JOIN players_has_teams ON players_has_teams.id_player = players.id WHERE id_team=:id');
+
+$stmt->bindValue(':id', $idTeam);
+$stmt->execute();
+$players = $stmt->fetchAll();
+
+
+
 ?>
 
+<div class="container">
+  <div class=" row rounded  header_contents_team">    
+    <div class="col-md-3 align-self-center">
+      <img src="<?php echo $team["logo"]; ?>" alt="Logo de l'équipe"> 
+    </div>
+    <div class="col-md-9 align-self-center name_team">
+      <?php echo $team["name"]; ?>
+    </div>      
+  </div>
 
-<body>
-  <header class="container-fluide">
-    <div class="container">
-      <div class=" row rounded  header_contents_team">    
-        <div class="col-md-3 align-self-center">
-          <img src="<?php echo $team["logo"]; ?>" alt="Logo de l'équipe"> 
-        </div>
-        <div class="col-md-9 align-self-center name_team">
-          <?php echo $team["name"]; ?>
-        </div>      
+  <div class="row sub_team_header">
+
+    <ul class="list-group col-md-6">
+      <li class="list-group-item">Président : <?php echo $team["president"]; ?></li>
+      <li class="list-group-item">Date de création : <?php echo $team["fundation_date"]; ?></li>
+      <li class="list-group-item">Adresse : <?php echo $team["adress"]; ?></li>
+    </ul>
+
+    <ul class="list-group col-md-6">
+      <li class="list-group-item">Entraîneur : <?php echo $team["coach_name"]; ?></li>
+      <li class="list-group-item">Date d'anniversaire : <?php echo $team["coach_birthday"]; ?></li>
+      <li class="list-group-item">Nationalité : <?php echo $team["coach_nationality"]; ?></li>
+    </ul>
+  </div>
+
+  <div class="row team_button">
+    <div class="col-md-6 text-center">
+      <button type="button" class="btn btn-outline-success">
+        <a href="<?php echo $team["website"]; ?>">www.mhscfoot.com</a>
+      </button>
+    </div>
+    <div class="col-md-6 text-center">
+      <button type="button" class="btn btn-outline-success">
+        <a href="<?php echo $team["link"]; ?>">https://www.lequipe.fr</a
+        ></button>
       </div>
-    
-      <div class="row sub_team_header">
-
-        <ul class="list-group col-md-6">
-          <li class="list-group-item">Président : <?php echo $team["president"]; ?></li>
-          <li class="list-group-item">Date de création : <?php echo $team["fundation_date"]; ?></li>
-          <li class="list-group-item">Adresse : <?php echo $team["adress"]; ?></li>
-        </ul>
-
-        <ul class="list-group col-md-6">
-          <li class="list-group-item">Entraîneur : <?php echo $team["coach_name"]; ?></li>
-          <li class="list-group-item">Date d'anniversaire : <?php echo $team["coach_birthday"]; ?></li>
-          <li class="list-group-item">Nationalité : <?php echo $team["coach_nationality"]; ?></li>
-        </ul>
-      </div>
-
-      <div class="row team_button">
-        <div class="col-md-6 text-center">
-          <button type="button" class="btn btn-outline-success">
-            <a href="<?php echo $team["website"]; ?>">www.mhscfoot.com</a>
-          </button>
-        </div>
-        <div class="col-md-6 text-center">
-          <button type="button" class="btn btn-outline-success">
-            <a href="<?php echo $team["link"]; ?>">https://www.lequipe.fr</a
-            ></button>
-          </div>
-      </div>
-    </div>       
-  </header>
-
+  </div>
   <section>
     <table class="table">
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th scope="col">Joueur</th>
+          <th scope="col">Né le</th>
+          <th scope="col">Poste</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        <?php foreach ($players as $player) { ?>
+          <tr>
+            <th scope="row"><?= $player['number'] ?></th>
+            <td><?= $player['name'] ?></td>
+            <td><?= $player['birthday_date'] ?></td>
+            <td><?= $player['poste'] ?></td>
+          </tr>
+        <?php } ?>
       </tbody>
     </table>
-
-    <table class="table">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
-
   </section>
-</body>
+</div>
 
 
 
