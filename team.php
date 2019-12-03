@@ -36,7 +36,12 @@ $stmt->bindValue(':id', $idTeam);
 $stmt->execute();
 $players = $stmt->fetchAll();
 
+$stmt = $db->prepare('SELECT * FROM matchs WHERE (id_team_home = :id OR id_team_home = :id)'); 
+$stmt->bindValue(':id', $idTeam);
+$stmt->execute();
+$matchs = $stmt->fetchAll();
 
+var_dump($matchs);
 
 ?>
 
@@ -100,15 +105,5 @@ $players = $stmt->fetchAll();
     </table>
   </section>
 </div>
-
-
-
-
-
-
-
-
-
-
 
 <?php include('include/footer.php'); ?>
