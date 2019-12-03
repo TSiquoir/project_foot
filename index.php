@@ -2,7 +2,7 @@
 
 <?php
 //==============================================================
-//Pour récuperer les données
+//Pour récuperer les équipes dans la base de donnée
 //==============================================================
 require('utils/db.php');        
 
@@ -14,6 +14,7 @@ $teams = $stmt->fetchAll();
 ?>
 
 <div class="container">
+    <div class="teams_listing">
     <?php foreach ($teams as $team) { ?>
         <div class="card mb-3 rounded shadow-sm p-3 mb-5 bg-white rounded text-center">   
             <a href="team.php?id=<?php echo $team['id'] ?>">
@@ -32,6 +33,7 @@ $teams = $stmt->fetchAll();
             </a>
         </div>
     <?php } ?>
+    </div>
 </div>
 
 <?php include('include/footer.php'); ?>

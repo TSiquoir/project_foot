@@ -34,7 +34,7 @@ $team = $stmt->fetch();
 
 <body>
   <header class="container-fluide">
-    <div class="container header_team">
+    <div class="container">
       <div class=" row rounded  header_contents_team">    
         <div class="col-md-3 align-self-center">
           <img src="<?php echo $team["logo"]; ?>" alt="Logo de l'équipe"> 
